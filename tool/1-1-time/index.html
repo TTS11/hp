@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>年越しカウントダウン！</title>
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #282c34;
+            color: #61dafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .header {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .countdown-container {
+            text-align: center;
+            max-width: 70%;
+            margin: auto;
+        }
+
+        #countdown {
+            font-size: 4em;
+            font-weight: bold;
+
+        }
+
+        #greeting {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            #countdown {
+                font-size: 3.5em;
+            }
+
+            #greeting {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1></h1>
+    <div class="header">年越しまで</div>
+
+    <div class="countdown-container">
+        <div id="countdown"></div>
+        <div id="greeting"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const countdownElement = document.getElementById('countdown');
+            const greetingElement = document.getElementById('greeting');
+
+            function updateCountdown() {
+                const now = new Date();
+                const newYear = new Date(now.getFullYear() + 1, 0, 1);
+                const timeRemaining = newYear - now;
+
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                const milliseconds = timeRemaining % 1000;
+
+                const decimalSeconds = (milliseconds / 1000).toFixed(3).substring(2); // ミリ秒を小数点第3位まで表示
+
+                let countdownText = '';
+
+                if (days > 0) {
+                    countdownText += `${days}日 `;
+                }
+
+                if (hours > 0 || days > 0) {
+                    countdownText += `${hours}時間 `;
+                }
+
+                if ((minutes > 0 || hours > 0 || days > 0) && !(minutes === 0 && hours === 0 && days === 0)) {
+                    countdownText += `${minutes}分 `;
+                }
+
+                if (days === 0 && hours === 0 && minutes === 0) {
+                    countdownText += `${seconds}.${decimalSeconds}秒`;
+                } else if (!(seconds === 0 && decimalSeconds === '000')) {
+                    countdownText += `${seconds}秒<br>${decimalSeconds}`;
+                }
+
+                countdownElement.innerHTML = countdownText;
+
+                if (now.getMonth() === 0 && now.getDate() <= 3) {
+                    greetingElement.innerHTML = 'あけましておめでとう！';
+                } else {
+                    greetingElement.innerHTML = '';
+                }
+            }
+
+            setInterval(updateCountdown, 10); // 10ミリ秒ごとに更新
+            updateCountdown();
+        });
+    </script>
+</body>
+
+</html>
