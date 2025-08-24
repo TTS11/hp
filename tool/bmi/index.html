@@ -1,1 +1,28 @@
 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>適正体重計算機</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h1>適正体重計算機</h1>
+            <form onsubmit="return false;">
+                <label for="height">身長(cm):</label>
+                <input type="number" id="height" name="height" required>
+                <button type="button" onclick="calcNormalWeight()">計算する</button>
+            </form>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
