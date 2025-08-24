@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ボタンゲーム2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #120909;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 24px;
+            margin: 32px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        #score {
+            font-size: 48px;
+            margin-bottom: 64px;
+            color: white;
+        }
+
+        #time {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="button">押して。</button>
+    <div id="score">0</div>
+    <div id="time">残り時間: <span id="time-value">30</span></div>
+    <script src="game.js"></script>
+</body>
+
+</html>
