@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>次の僕の誕生日まで</title>
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #00b4db, #0083b0);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 96px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        small {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>次の僕の誕生日まで</h1>
+        <p id="days"></p>
+        <small>4月1日です。</small>
+    </div>
+
+    <script>
+        const today = new Date();
+        const aprilFoolsDay = new Date(today.getFullYear(), 3, 1);
+        let daysUntilAprilFoolsDay = Math.floor((aprilFoolsDay - today) / (1000 * 60 * 60 * 24));
+        if (daysUntilAprilFoolsDay < 0) {
+            aprilFoolsDay.setFullYear(aprilFoolsDay.getFullYear() + 1);
+            daysUntilAprilFoolsDay = Math.floor((aprilFoolsDay - today) / (1000 * 60 * 60 * 24));
+        }
+        //眠いなあ。このコメント見てる人いる？ｗｗｗ
+        const daysElement = document.getElementById("days");
+        daysElement.textContent = daysUntilAprilFoolsDay + " 日";
+    </script>
+</body>
+
+</html>
