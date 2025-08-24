@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>テキスト変換ツール</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+
+    <style>
+        textarea {
+            width: 400px;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>テキスト変換ツール</h1>
+
+    <textarea id="inputText" placeholder="テキストを入力してください"></textarea>
+
+    <button class="button" onclick="convertText()">変換する</button>
+
+    <h2>変換結果</h2>
+
+    <textarea id="outputText" readonly></textarea>
+
+    <button class="button" onclick="copyText()">コピーする</button>
+
+    <script>
+        function convertText() {
+            const input = document.getElementById("inputText").value;
+            const lines = input.split("\n");
+            let output = "";
+
+            for (let i = 0; i < lines.length; i++) {
+                output += `"${lines[i].trim()}",\n`;
+            }
+
+            document.getElementById("outputText").value = output;
+        }
+
+        function copyText() {
+            const output = document.getElementById("outputText");
+            output.select();
+            document.execCommand("copy");
+            alert("テキストがコピーされました!");
+        }
+    </script>
+</body>
+
+</html>
