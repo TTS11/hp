@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kanji to Hiragana and Write JSON</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Kanji, Hiragana, and Write JSON Generator</h1>
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="input">Enter Kanji, Hiragana, and Write (newline-separated, 3 lines per
+                                    group):</label>
+                                <textarea id="input" class="form-control" rows="12"
+                                    placeholder="Kanji\nHiragana\nWrite\n..."></textarea>
+                            </div>
+                            <button type="button" id="convert" class="btn btn-primary btn-block">Convert to
+                                JSON</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card bg-light mt-4">
+                    <div class="card-body">
+                        <label for="output">Output:</label>
+                        <textarea id="output" rows="8" class="form-control" readonly></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#convert').click(function () {
+                var input = $('#input').val().split('\n');
+                var jsonOutput = [];
+
+                for (var i = 0; i < input.length; i += 3) {
+                    if (input[i] && input[i + 1] && input[i + 2]) {
+                        var entry = {
+                            'kanji': input[i],
+                            'hiragana': input[i + 1],
+                            'write': input[i + 2]
+                        };
+                        jsonOutput.push(entry);
+                    }
+                }
+
+                $('#output').val(JSON.stringify(jsonOutput, null, 2));
+            });
+        });
+    </script>
+</body>
+
+</html>
