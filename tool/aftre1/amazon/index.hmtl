@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Amazonリンク短縮サイト</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            background-color: #0080ff;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .form-group input[type="text"] {
+            flex: 1;
+            height: 40px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            width: 100px;
+            height: 40px;
+            padding: 0;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0080ff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .shortened-link {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .shortened-link a {
+            color: #0080ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Amazonリンク短縮サイト</h1>
+    <div class="container">
+        <div class="form-group">
+            <input type="text" id="amazon-link" placeholder="Amazonの商品リンクを入力してください">
+            <button onclick="shortenLink()"><img src="https://cdn-icons-png.flaticon.com/512/352/352109.png"
+                    alt="Shorten"></button>
+        </div>
+        <div class="shortened-link" id="shortened-link"></div>
+    </div>
+
+    <script>
+        function shortenLink() {
+            var amazonLink = document.getElementById("amazon-link").value;
+            var shortenedLink = shortenAmazonLink(amazonLink);
+            displayShortenedLink(shortenedLink);
+        }
+
+        function shortenAmazonLink(amazonLink) {
+            var shortenedLink = "";
+
+            var regexDp = /\/dp\/([^\/?#]+)/;
+            var regexProduct = /\/product\/([^\/?#]+)/;
+            var matchDp = amazonLink.match(regexDp);
+            var matchProduct = amazonLink.match(regexProduct);
+
+            if (matchDp && matchDp[1]) {
+                var productId = matchDp[1];
+                shortenedLink = "https://www.amazon.co.jp/dp/" + productId;
+            } else if (matchProduct && matchProduct[1]) {
+                var productId = matchProduct[1];
+                shortenedLink = "https://www.amazon.co.jp/dp/" + productId;
+            } else {
+                shortenedLink = "無効なリンクです";
+            }
+
+            return shortenedLink;
+        }
+
+        function displayShortenedLink(shortenedLink) {
+            var shortenedLinkElement = document.getElementById("shortened-link");
+            shortenedLinkElement.innerHTML = '<a href="' + shortenedLink + '" target="_blank">' + shortenedLink + '</a>';
+        }
+    </script>
+</body>
+
+</html>
