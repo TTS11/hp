@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>コナンっぽいタイトルメーカー</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #bba7e8;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #result {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>コナンっぽいタイトルメーカー</h1>
+    <button onclick="generateTitle()">生成ボタン</button>
+    <div id="result"></div>
+
+    <script>
+        var adjectives = [
+            "紺碧の",
+            "深淵なる",
+            "黒い",
+            "朱色の",
+            "幻想的な",
+            "謎の",
+            "遺失した",
+            "黄金の",
+            "氷の",
+            "暗黒の",
+            "鮮血まみれの",
+            "宿命の",
+            "魔法使いの",
+            "蒼穹の",
+            "炎熱の",
+            "幽霊船の",
+            "鋼鉄の",
+            "悪魔の",
+            "禁断の",
+            "絶望の",
+            "神秘的な",
+            "破滅的な",
+            "追憶の",
+            "冷酷な",
+            "死者の",
+            "悲痛な",
+            "暗黙の",
+            "執念深い",
+            "戦慄の",
+            "消えた",
+            "狡猾な",
+            "神聖な",
+            "輝かしい",
+            "魅惑的な",
+            "衝撃的な",
+            "運命共同体の",
+            "深遠な",
+            "迷宮入りの",
+            "秘密の",
+            "闇夜の",
+            "忘却の",
+            "誘拐された",
+            "隠された",
+            "無垢な",
+            "未知の",
+            "時空を超えた",
+            "迫り来る",
+            "邪悪な",
+            "悪夢の",
+            "破壊された",
+            "幻覚の",
+            "運命の",
+            "熱狂的な",
+            "神秘の",
+            "呪われた",
+            "激動の",
+            "禁じられた",
+            "驚愕の",
+            "切なる",
+            "陰謀の"
+        ];
+
+
+        var nouns = [
+            "瞳",
+            "復讐",
+            "密室",
+            "罠",
+            "業火",
+            "失踪",
+            "謎",
+            "真実",
+            "暗号",
+            "黄昏",
+            "夜想曲",
+            "偽り",
+            "鍵",
+            "追憶",
+            "幻影",
+            "運命",
+            "闇",
+            "予言",
+            "深淵",
+            "悲劇",
+            "時計",
+            "迷宮",
+            "絆",
+            "夢",
+            "嘆き",
+            "幻",
+            "虹",
+            "幸福",
+            "逆転",
+            "旅路",
+            "希望",
+            "秘密",
+            "宝物",
+            "悪夢",
+            "哀しみ",
+            "復活",
+            "対決",
+            "罪",
+            "癒し",
+            "疑惑",
+            "復元",
+            "復興",
+            "消失",
+            "舞台",
+            "犠牲",
+            "光",
+            "祈り",
+            "奇跡",
+            "幽霊",
+            "流れ星",
+            "戦士",
+            "封印",
+            "遺産",
+            "追想",
+            "探偵",
+            "闘争",
+            "循環",
+            "約束",
+            "終焉",
+            "始まり",
+            "憎悪",
+            "偶像",
+            "誘拐",
+            "不幸",
+            "幼なじみ",
+            "偶然",
+            "狂気",
+            "旅人",
+            "仮面",
+            "遺言",
+            "青春",
+            "倒錯",
+            "対立",
+            "憧憬",
+            "依存",
+            "追放",
+            "変容",
+            "密偵",
+            "浮遊",
+            "囚人",
+            "迷信",
+            "絶望",
+            "喪失"
+        ];
+
+
+        function generateTitle() {
+            var randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+            var randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            var title = randomAdjective + randomNoun;
+            document.getElementById("result").textContent = title;
+        }
+    </script>
+</body>
+
+</html>
