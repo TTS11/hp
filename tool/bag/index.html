@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ブンブンブン</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+    <style>
+        #image {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+        body{
+            background-color: rgb(40, 75, 63);
+        }
+    </style>
+</head>
+<body>
+
+    <img id="image" src="test.png">
+
+    <script>
+        var img = document.getElementById('image');
+        var x = 0;
+        var y = 0;
+        var xSpeed = 3;
+        var ySpeed = 2;
+
+        function moveImage() {
+            var width = window.innerWidth - img.offsetWidth;
+            var height = window.innerHeight - img.offsetHeight;
+
+            if (x + img.offsetWidth > width || x < 0) {
+                xSpeed = -xSpeed;
+            }
+
+            if (y + img.offsetHeight > height || y < 0) {
+                ySpeed = -ySpeed;
+            }
+
+            x += xSpeed;
+            y += ySpeed;
+
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+
+            requestAnimationFrame(moveImage);
+        }
+
+        moveImage();
+    </script>
+
+</body>
+</html>
