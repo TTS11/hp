@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日、先生が当てるかもしれない出席番号</title>
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 50px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        #bigNumbers {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 50px;
+        }
+
+        #datePicker {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 10px;
+            border-bottom: 1px solid #e1e1e1;
+            background-color: #fff;
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        strong {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>今日、先生が当てるかも<br>しれない出席番号</h1>
+    <div id="bigNumbers"></div>
+    <input type="date" id="datePicker" onchange="calculateNumbers()">
+    <ul id="results"></ul>
+
+    <script>
+        window.onload = function () {
+            const today = new Date();
+            document.getElementById("datePicker").value = today.toISOString().split('T')[0];
+            calculateNumbers();
+        };
+
+        function calculateNumbers() {
+            const date = new Date(document.getElementById("datePicker").value);
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+
+            const results = [];
+            const bigNumbers = [];
+
+            const computations = [
+                { label: '日付(day)', value: day },
+                { label: '月と日の全てのケタを足したもの', value: addDigits(month) + addDigits(day) },
+                { label: '月と日を足したもの', value: month + day },
+                { label: '日の全てのケタを掛けたもの', value: multiplyDigits(day) },
+                { label: '日の全てのケタを足したもの', value: addDigits(day) },
+                { label: '日を２倍したもの', value: day * 2 },
+                { label: '月を２倍したもの', value: month * 2 },
+                { label: '月', value: month },
+                { label: '月から日を引いたもの', value: month - day },
+                { label: '日から月を引いたもの', value: day - month }
+            ];
+
+            computations.forEach(computation => {
+                if (computation.value >= 0 && computation.value <= 30) {
+                    results.push(`${computation.label}: <strong>${computation.value}</strong>`);
+                    bigNumbers.push(computation.value);
+                }
+            });
+
+            document.getElementById("bigNumbers").textContent = bigNumbers.join(" . ");
+
+            const ul = document.getElementById("results");
+            ul.innerHTML = "";
+            results.forEach(res => {
+                const li = document.createElement("li");
+                li.innerHTML = res;
+                ul.appendChild(li);
+            });
+        }
+
+        function addDigits(n) {
+            return Array.from(String(n), Number).reduce((acc, curr) => acc + curr, 0);
+        }
+
+        function multiplyDigits(n) {
+            return Array.from(String(n), Number).reduce((acc, curr) => acc * curr, 1);
+        }
+    </script>
+</body>
+
+</html>
