@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>URLエンコード/デコード</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>URLエンコード/デコード</h1>
+        <div class="form">
+            <label>入力：</label>
+            <textarea id="input"></textarea>
+            <br>
+            <button class="button" onclick="urlEncode()">URLエンコード</button>
+            <button class="button" onclick="urlDecode()">URLデコード</button>
+        </div>
+        <div class="form">
+            <label>出力：</label>
+            <textarea id="output"></textarea>
+            <button class="button" onclick="copyToClipboard()">コピー</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
