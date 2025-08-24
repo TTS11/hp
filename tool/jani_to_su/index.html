@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ジャニーズをXに</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 30px;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        textarea,
+        p,
+        button,
+        select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        textarea,
+        p {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script type="text/javascript">
+        function replaceText() {
+            var inputText = document.getElementById('inputText').value;
+            var selectedOption = document.getElementById('replaceOption').value;
+
+            var replaceWordsTwitter = ["ジャニーズ"];
+
+            for (var i = 0; i < replaceWordsTwitter.length; i++) {
+                if (selectedOption === "option1") {
+                    inputText = inputText.split(replaceWordsTwitter[i]).join("SMILE-UP");
+                } else if (selectedOption === "option2") {
+                    inputText = inputText.split(replaceWordsTwitter[i]).join("SMILE-UP(旧ジャニーズ事務所)");
+                }
+            }
+
+            document.getElementById('outputText').innerText = inputText;
+        }
+
+        function copyText() {
+            var outputText = document.getElementById('outputText');
+            var textArea = document.createElement('textarea');
+            textArea.value = outputText.innerText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('Copy');
+            textArea.remove();
+        }
+    </script>
+</head>
+
+<body>
+    <h3>入力した文章にあるジャニーズの文字を最新の表記に一括で書き換えます。</h3>
+    <textarea id="inputText"></textarea><br>
+    <h3>変換先の文字列を選択してください。</h3>
+    <select id="replaceOption">
+        <option value="option1">ジャニーズ -> SMILE-UP</option>
+        <option value="option2">ジャニーズ -> SMILE-UP(旧ジャニーズ事務所)</option>
+    </select><br>
+    <button onclick="replaceText()">置換</button><br>
+    <button onclick="copyText()">コピー</button><br>
+    <p id="outputText"></p>
+    </h3>
+</body>
+</html>
