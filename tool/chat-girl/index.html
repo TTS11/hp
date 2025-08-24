@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>1人で彼女とチャット!!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="１人でチャット!!" />
+    <meta property="og:site_name" content="TTS-HP" />
+    <meta name="twitter:card" content="Summary Card" />
+    <meta name="twitter:site" content="@tts2525" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+        }
+        h3 {
+            text-align: center;
+            color: #000000;
+        }
+        #chatBox {
+            width: 70%;
+            height: 500px;
+            margin: auto;
+            border: 1px solid #ddd;
+            overflow-y: scroll;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #messageForm {
+            width: 70%;
+            margin: auto;
+            margin-top: 10px;
+            display: flex;
+        }
+
+        #userMessage {
+            flex-grow: 1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 5px 15px;
+            background-color: #0099cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0077aa;
+        }
+
+        p {
+            padding: 5px;
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #0077aa;
+        }
+        p:nth-child(even) {
+            background-color: #e6f7ff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>彼女とトーク！！<br>(JavaScript彼女)</h1>
+    <div id="chatBox">
+        <!-- メッセージはここに表示されます -->
+    </div>
+
+    <form id="messageForm">
+        <input type="text" id="userMessage" placeholder="メッセージを入力" required>
+        <button type="submit">送信</button>
+    </form>
+    <h3>
+        このアプリに関するご意見等は<a href="https://toshi1234.com/wp/data"> 情報提供フォーム</a>よりお寄せください。
+    </h3>
+    <script>
+        const wordLists = [
+            ["一緒にホテル行こ！！"]
+        ];
+
+        function generateSentence() {
+            let sentence = "";
+            for (let i = 0; i < wordLists.length; i++) {
+                const randomIndex = Math.floor(Math.random() * wordLists[i].length);
+                sentence += wordLists[i][randomIndex];
+            }
+            return sentence;
+        }
+
+        var preSetMessages = [
+            "愛してるよ❤",
+            "家行っていい。。。？",
+            "大好きだよ、、",
+            "私が連絡したら20秒以内に返事してね！❤",
+            "私のこと、、好き？、、",
+            "結婚しようね！",
+            "一緒に映画行かない ？？",
+            "家、倒壊したよ❤ 好き❤",
+            generateSentence()
+        ];
+        var preSetNames = ["彼女"];
+
+        var chatBox = document.getElementById("chatBox");
+        var messageForm = document.getElementById("messageForm");
+        var userMessage = document.getElementById("userMessage");
+
+        function postRandomMessage() {
+            var randomMessageIndex = Math.floor(Math.random() * preSetMessages.length);
+            var randomNameIndex = Math.floor(Math.random() * preSetNames.length);
+
+            var newRandomMessage = document.createElement("p");
+            newRandomMessage.textContent = preSetNames[randomNameIndex] + "： " + preSetMessages[randomMessageIndex];
+            chatBox.appendChild(newRandomMessage);
+
+            // ここでチャットボックスを最新のメッセージまでスクロール
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            var randomDelay = Math.floor(Math.random() * 3000) + 1000;  // 1秒から4秒の間でランダムに
+            setTimeout(postRandomMessage, randomDelay);
+        }
+
+        messageForm.onsubmit = function (e) {
+            e.preventDefault();
+
+            if (userMessage.value.trim() === '') {
+                return;
+            }
+
+            var newUserMessage = document.createElement("p");
+            newUserMessage.textContent = "あなた： " + userMessage.value;
+            chatBox.appendChild(newUserMessage);
+
+            // ここでチャットボックスを最新のメッセージまでスクロール
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            userMessage.value = '';
+        };
+        postRandomMessage();
+    </script>
+</body>
+
+</html>
