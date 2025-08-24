@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>1秒後</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #e0a9e2;
+            font-family: Arial, sans-serif;
+        }
+
+        #clock {
+            font-size: 100px;
+            text-align: center;
+            color: #333333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        P {
+            font-size: 85;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <p>1秒後の時間時計</p><br>
+    <div id="clock"></div>
+
+    <script>
+        // 現在の時刻を表示する関数
+        function showCurrentTime() {
+            var now = new Date(); // 現在の日時を取得
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            // 1秒後の時間を計算
+            seconds += 1;
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes += 1;
+                if (minutes >= 60) {
+                    minutes = 0;
+                    hours += 1;
+                    if (hours >= 24) {
+                        hours = 0;
+                    }
+                }
+            }
+
+            // 時間を2桁の数字に整形
+            hours = ('0' + hours).slice(-2);
+            minutes = ('0' + minutes).slice(-2);
+            seconds = ('0' + seconds).slice(-2);
+
+            // 時刻を表示
+            document.getElementById('clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+        }
+
+        // 1秒ごとに時刻を更新
+        setInterval(showCurrentTime, 1000);
+    </script>
+</body>
+
+</html>
