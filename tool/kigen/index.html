@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>先生の機嫌予報</title>
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f5f7;
+        }
+
+        h1 {
+            font-family: 'M PLUS 1p', sans-serif;
+        }
+
+        .forecast-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .today-card {
+            border: 2px solid blue;
+        }
+
+        .mood-label {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        h4 {
+            text-align: center;
+        }
+
+        details {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: 0.5em 0.5em 0;
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -0.5em -0.5em 0;
+            padding: 0.5em;
+        }
+
+        /*ぱっと光って咲いた*/
+        details[open] {
+            padding: 0.5em;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">先生の機嫌予報(β版)</h1>
+        <div id="moodForecast" class="row"></div>
+    </div>
+    <details>
+        <summary>説明はこちら</summary>
+        <h4>
+            良い/悪い は、午前は良くて午後は悪いということです。<br>
+            予報に科学的・客観的信憑性はありません。<br>
+            開発者の主観によるものです。<br>
+            あと、予報はだいたい適当。<br>
+            ほやけど、先生は機嫌の浮き沈みが激しいタイプやから当たるでしょ。
+        </h4>
+    </details><br><br>
+    <script>
+        // 現在の日時を取得
+        let currentDate = new Date();
+        let today = new Date();
+        today.setDate(today.getDate() - 1); // 初回ループ時に1日進むため
+        const weekDays = ["日", "月", "火", "水", "木", "金", "土"];
+        const moodCategories = {
+            1: "良い<br>🌞",
+            2: "悪い<br>☔",
+            3: "良い/悪い<br>🌞/☔",
+            4: "良い/普通<br>🌞/☁",
+            5: "普通<br>☁",
+            6: "悪い/良い<br>☔/🌞",
+            7: "悪い/普通<br>☔/☁",
+            8: "普通/良い<br>☁/🌞",
+            9: "普通/悪い<br>☁/☔"
+        };
+
+        const specialForecast = {
+            "2023-9-5": "悪い<br>☔",
+            "2024-1-1": "悪い<br>☔"
+        };
+
+        function calculateMood(year, month, day) {
+            const dateString = `${year}-${month}-${day}`;
+
+            // 特定の日付に対応する予報
+            if (specialForecast[dateString]) {
+                return specialForecast[dateString];
+            }
+
+            const hash = year * 365 + month * 30 + day;
+            const value = (hash % 9) + 1;
+            return moodCategories[value];
+        }
+        function displayForecast() {
+            let forecast = '';
+            let count = 0;
+            while (count < 6) {
+                today.setDate(today.getDate() + 1);
+                if (today.getDay() !== 6 && today.getDay() !== 0) {
+                    let mood = calculateMood(today.getFullYear(), today.getMonth() + 1, today.getDate());
+                    let todayClass = (currentDate.getDate() == today.getDate() && currentDate.getMonth() == today.getMonth() && currentDate.getFullYear() == today.getFullYear()) ? "today-card" : "";
+                    forecast += `
+                    <div class="col-md-4 mb-4">
+                        <div class="forecast-card p-4 bg-white ${todayClass}">
+                            <h4>${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日 (${weekDays[today.getDay()]})</h4>
+                            <p class="mood-label">${mood}</p>
+                        </div>
+                    </div>`;
+                    count++;
+                }
+            }
+            document.getElementById("moodForecast").innerHTML = forecast;
+        }
+        displayForecast();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+</body>
+</html>
