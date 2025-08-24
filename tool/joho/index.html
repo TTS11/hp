@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>情報モラルバスター</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg" href="/ttshome/1678453241image.jpg">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      display: block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>情報モラルバスター</h1>
+    <h3>情報モラル教室などで、「何で来るの」と「何で来るの？」誤解によるトラブルなどが度々紹介されています。このツールは、はてなマークを過剰につけることで、そういったトラブルを防止する事ができるのではないかと考え生まれました。</h3>
+    <div>
+      <label for="input">文章を入力してください：</label>
+      <input type="text" id="input" />
+      <button onclick="addQuestionMarks()">変換</button>
+    </div>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function addQuestionMarks() {
+      var inputText = document.getElementById("input").value;
+      var outputDiv = document.getElementById("output");
+      var outputText = "";
+
+      for (var i = 0; i < inputText.length; i++) {
+        outputText += inputText.charAt(i) + "?";
+      }
+
+      outputDiv.textContent = outputText;
+    }
+  </script>
+</body>
+
+</html>
